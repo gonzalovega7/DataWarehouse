@@ -1,0 +1,12 @@
+
+.showAddInput{
+    display: inline-block;
+    width: 50%;
+    padding: 10px 0 0 28px;;
+}
+.hideAddInput{
+    display: none;
+}
+.show{
+display: block;
+}

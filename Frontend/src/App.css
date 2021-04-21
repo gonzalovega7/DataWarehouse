@@ -1,0 +1,79 @@
+.App {
+  text-align: center;
+}
+.logIn {
+  background: rgba(90, 217, 172, 0.5);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-image: url(https://kafene.com/wp-content/themes/kafene/images/bgd__pattern.svg);
+  background-repeat: no-repeat;
+  background-position: left 92% bottom 59%;
+  animation: 1s apareceBackImg cubic-bezier(0.25, 0.1, 0.21, 0.77);
+}
+@keyframes apareceBackImg {
+  0% {
+    background-position: left 0% bottom 59%;
+  }
+  100% {
+    background-position: left 92% bottom 59%;
+  }
+}
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+h1 {
+  color: #273152 !important;
+  font-weight: 300 !important;
+  font-size: 3rem !important;
+}
+.generic-button {
+  min-width: 51px;
+  padding: 10px 25px;
+  border: 1px solid #273152;
+  border-radius: 25px;
+  color: #fff;
+  text-decoration: none;
+  background: #273152 !important;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.generic-button:disabled {
+  opacity: 0.4 !important;
+  cursor: default;
+  pointer-events: none;
+}
+
+.generic-button:hover {
+  text-decoration: none;
+  border: 1px solid #273152;
+  color: #273152;
+  font-weight: 500;
+  background: #fff !important;
+}
+.generic-button:focus {
+  outline: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}

@@ -1,0 +1,67 @@
+.submit-ok-btn {
+  border-color: #358873;
+  background: #4e9c81 !important;
+  padding: 10px 40px;
+}
+.submit-err-btn {
+  background: #e57373 !important;
+  border: 1px solid #c62828;
+  padding: 10px 40px;
+}
+.loading {
+  color: white;
+  animation: loading 1.5s infinite cubic-bezier(0.42, 0, 0.61, 0.91);
+}
+.submit-ok {
+  color: white;
+  animation: submitAccepted 1.5s infinite cubic-bezier(0.99, 0.11, 0.09, 0.99);
+}
+.generic-button {
+  min-width: 51px;
+  padding: 10px 25px;
+  border: 1px solid #273152;
+  border-radius: 25px;
+  color: #fff;
+  text-decoration: none;
+  background: #273152 !important;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.generic-button:disabled {
+  opacity: 0.4 !important;
+  cursor: default;
+  pointer-events: none;
+}
+
+.generic-button:hover {
+  text-decoration: none;
+  border: 1px solid #273152;
+  color: #273152;
+  font-weight: 500;
+  background: #fff !important;
+}
+.generic-button:focus {
+  outline: none;
+}
+.align-right {
+  margin-left: 82.9%;
+}
+
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes submitAccepted {
+  0% {
+    transform: scale(0.6);
+  }
+  100% {
+    transform: scale(1.4);
+  }
+}

@@ -1,0 +1,37 @@
+.input {
+  background-color: #f8f9fa;
+}
+
+.card {
+  height: 80vh;
+  min-height: 340px;
+  margin: 10vh 20%;
+  padding: 30px 10%;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  background-color: rgba(255,255,255, 0.8)!important;
+  z-index: 2;
+  animation: 1s aparece ease;
+
+}
+.mg10-4 {
+  margin: 50px 4%;
+}
+.mg10-4 {
+  margin: 10px 4%;
+}
+.buttons{
+  border-color: #273152 !important;
+  background: #273152 !important;
+  font-weight: 700 !important;
+  color: #fff !important;
+}
+
+@keyframes aparece {
+  0%{opacity: 0;
+  transform: translate(0,100%);}
+  50%{opacity: 0.4;}
+  100%{opacity: 1;
+    transform: translate(0,0%)}
+}

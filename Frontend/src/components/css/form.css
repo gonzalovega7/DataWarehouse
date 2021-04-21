@@ -1,0 +1,38 @@
+.form-ctn {
+  margin: 30px 25%;
+  width: 50%;
+  text-align: left;
+  background-color: #fff;
+  padding: 2.5em 2rem;
+  box-shadow: 0 2px 4px rgba(41, 43, 53, 0.04);
+}
+.form-ctn-modal {
+  margin: 30px 10% !important;
+  width: 80% !important;
+}
+.label-double-mail {
+  text-align: center;
+}
+.inlineGroup {
+  width: 42.5%;
+  margin: 20px 0;
+  display: inline-block;
+}
+.m-right {
+  margin-right: 5%;
+}
+.blockGroup {
+  width: 90%;
+  margin: 20px 2.5% 20px 0;
+}
+.p-alert {
+  color: grey;
+  font-size: 0.75rem;
+}
+.form-section {
+  padding: 10px 0;
+  background: linear-gradient(180deg, #f7f8fc, #f2f3f7);
+}
+.form-section-modal {
+  background: #fff !important;
+}

@@ -1,0 +1,1031 @@
+openapi: 3.0.0
+info:
+  version: '1.0'
+  title: Data-Warehouse
+  description: Application for a marketing company to carry out CRUD of clients, users, regions, cities and countries.
+tags:
+  - name: Companies
+    description: List of companies to which the marketing service is offered
+  - name: Contacts
+    description: List of company contacts.
+  - name: Users
+    description: users or employees of our company
+  - name: Regions
+    description: regions where client companies are located
+  - name: Countries
+    description: Countries where client companies are located
+  - name: Cities
+    description: Cities where client companies are located
+
+components:
+  securitySchemes:
+    bearerToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  responses:
+    '500':
+      description: error
+      content:
+        application/json:
+          schema:
+            type: object
+            example: 
+              requestInfo:
+                 code: 500
+                 description: 'Internal Server error'
+                 date: Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)
+              data:
+                token: null
+                isAuthenticated: false
+      
+paths:
+  '/companies':
+    get:
+      tags:
+        - Companies
+      summary: gets all companies in database.
+      security:
+        - bearerToken: []
+      responses:
+        "200":
+          description: Succes conection
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 200
+                     description: success!
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    data: data
+                    isAuthenticated: true
+        "500":
+          $ref: '#/components/responses/500'
+  '/companies/newCompany':
+    post:
+      tags:
+        - Companies
+      summary: Post new companies on database.
+      security:
+        - bearerToken: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                company_name:
+                  type: string
+                company_address:
+                  type: string
+                mail:
+                  type: string 
+                phone:
+                  type: number
+                city_id:
+                  type: number
+      responses:
+        "200":
+          description: Succes conection
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 200
+                     description: 'new company added correctly!'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true
+        "400":
+          description: Succes conection
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 400
+                     description: 'company_name, company_address, mail, phone, city_id cant be undefined'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true            
+        "500":
+          $ref: '#/components/responses/500'        
+  '/companies/{company_id}/modify':
+    patch:
+      tags:
+        - Companies
+      summary: modify any company on database with an ID.
+      security:
+        - bearerToken: []
+      parameters:
+        - name: company_id
+          in: path
+          description: company id number.
+          required: true
+          schema:
+            type: integer
+            format: int64  
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                company_name:
+                  type: string
+                company_address:
+                  type: string
+                mail:
+                  type: string 
+                phone:
+                  type: integer
+                city:
+                  type: string  
+      responses:
+        "200":
+          description: "company_id :company_id modified correctly!"
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 200
+                     description: 'new company added correctly!'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true
+        "400":
+          description: Succes conection
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 400
+                     description: 'company_id :company_id does not exist'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true            
+        "500":
+          $ref: '#/components/responses/500'  
+  '/companies/{company_id}/delete':
+    delete:
+      tags:
+        - Companies
+      summary: Soft Delete of a company.
+      security:
+        - bearerToken: []
+      parameters:
+        - name: company_id
+          in: path
+          description: company id number.
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: eliminado
+          in: query
+          description: gets true boolean to delete any company.
+          required: true
+          schema:
+            type: boolean    
+      responses:
+        "200":
+          description: "company_id: :company_id is now inactive!"
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 200
+                     description: 'new company added correctly!'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true
+        "400":
+          description: Succes conection
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 400
+                     description: 'company_id :company_id does not exist.'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true            
+        "500":
+          $ref: '#/components/responses/500' 
+  
+  '/contacts':
+    get:
+      tags:
+        - Contacts
+      summary: gets all contacts in database.
+      security:
+        - bearerToken: []
+      responses:
+        "200":
+          description: Succes conection
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 200
+                     description: success!
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    data: data
+                    isAuthenticated: true
+        "500":
+          $ref: '#/components/responses/500'
+  '/contacts/newContact':
+    post:
+      tags:
+        - Contacts
+      summary: Post new contacts on database.
+      security:
+        - bearerToken: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                surname:
+                  type: string
+                position:
+                  type: string
+                mail:
+                  type: string 
+                interest:
+                  type: string
+                city_name:
+                  type: string
+                company_name:
+                  type: string
+      responses:
+        "200":
+          description: Successful conection
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 200
+                     description: 'new contact added correctly!'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true
+        "400":
+          description: Succes conection
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 400
+                     description: 'name, surname, position, mail, interest, company_id, city_id cant be undefined'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true            
+        "500":
+          $ref: '#/components/responses/500'        
+  '/contacts/{contact_id}/modify':
+    patch:
+      tags:
+        - Contacts
+      summary: modify any contact on database with an ID.
+      security:
+        - bearerToken: []
+      parameters:
+        - name: contact_id
+          in: path
+          description: contact id number.
+          required: true
+          schema:
+            type: integer
+            format: int64  
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                surname:
+                  type: string
+                position:
+                  type: string
+                mail:
+                  type: string 
+                interest:
+                  type: string
+                city_name:
+                  type: string
+                company_name:
+                  type: string  
+      responses:
+        "200":
+          description: 'succssesful conection'
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 200
+                     description: 'contact_id :contact_id modified correctly!'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true
+        "400":
+          description: Successfull conection
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 400
+                     description: 'contact_id :contact_id does not exist'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true            
+        "500":
+          $ref: '#/components/responses/500'  
+  '/contacts/{contact_id}/delete':
+    delete:
+      tags:
+        - Contacts
+      summary: Soft Delete of a company.
+      security:
+        - bearerToken: []
+      parameters:
+        - name: contact_id
+          in: path
+          description: company id number.
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: eliminado
+          in: query
+          description: gets true boolean to delete any contact.
+          required: true
+          schema:
+            type: boolean    
+      responses:
+        "200":
+          description: "company_id: :company_id is now inactive!"
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 200
+                     description: 'new company added correctly!'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true
+        "400":
+          description: Succes conection
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 400
+                     description: 'company_id :company_id does not exist.'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true            
+        "500":
+          $ref: '#/components/responses/500'        
+  
+  '/users':
+    get:
+      tags:
+        - Users
+      summary: gets all users in database.
+      security:
+        - bearerToken: []
+      responses:
+        "200":
+          description: Successfull conection
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 200
+                     description: success!
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    data: data
+                    isAuthenticated: true
+        "500":
+          $ref: '#/components/responses/500'
+  '/users/newUser':
+    post:
+      tags:
+        - Users
+      summary: Post new user on database.
+      security:
+        - bearerToken: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                surname:
+                  type: string
+                mail:
+                  type: string
+                pass:
+                  type: string 
+                admin:
+                  type: integer
+                phone:
+                  type: number
+      responses:
+        "200":
+          description: Successful conection
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 200
+                     description: 'new contact added correctly!'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true
+        "400":
+          description: Succes conection
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 400
+                     description: 'name, surname, position, mail, interest, company_id, city_id cant be undefined'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true            
+        "500":
+          $ref: '#/components/responses/500'        
+  '/users/{user_id}/modify':
+    patch:
+      tags:
+        - Users
+      summary: modify any user on database with an ID.
+      security:
+        - bearerToken: []
+      parameters:
+        - name: user_id
+          in: path
+          description: user id number.
+          required: true
+          schema:
+            type: integer
+            format: int64  
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                surname:
+                  type: string
+                mail:
+                  type: string
+                pass:
+                  type: string 
+                admin:
+                  type: integer
+                phone:
+                  type: number 
+      responses:
+        "200":
+          description: 'succssesful conection'
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 200
+                     description: 'user_id :user_id modified correctly!'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true
+        "400":
+          description: Successfull conection
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 400
+                     description: 'user_id :user_id does not exist'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true            
+        "500":
+          $ref: '#/components/responses/500'  
+  '/users/{user_id}/delete':
+    delete:
+      tags:
+        - Users
+      summary: Soft Delete of a company.
+      security:
+        - bearerToken: []
+      parameters:
+        - name: user_id
+          in: path
+          description: user_id id number.
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: eliminado
+          in: query
+          description: gets true boolean to delete region.
+          required: true
+          schema:
+            type: boolean    
+      responses:
+        "200":
+          description: "makes user inactive to GET"
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 200
+                     description: 'user_id: :user_id is now inactive!'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true
+        "400":
+          description: Succes conection
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 400
+                     description: 'user_id :user_id does not exist.'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true            
+        "500":
+          $ref: '#/components/responses/500'
+  
+  '/regions':
+    get:
+      tags:
+        - Regions
+      summary: gets all regions in database.
+      security:
+        - bearerToken: []
+      responses:
+        "200":
+          description: Successfull conection
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 200
+                     description: success!
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    data: data
+                    isAuthenticated: true
+        "500":
+          $ref: '#/components/responses/500'
+  '/regions/newRegion':
+    post:
+      tags:
+        - Regions
+      summary: Post new region to database.
+      security:
+        - bearerToken: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                region_name:
+                  type: string
+                country_name:
+                  type: string
+                city_name:
+                  type: string
+              
+      responses:
+        "200":
+          description: Successful conection
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 200
+                     description: 'new region added correctly!'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true
+        "400":
+          description: Succes conection
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 400
+                     description: 'region_name cant be undefined'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true            
+        "500":
+          $ref: '#/components/responses/500'        
+  '/regions/{region_id}/modify':
+    patch:
+      tags:
+        - Regions
+      summary: modify any region on database with an ID.
+      security:
+        - bearerToken: []
+      parameters:
+        - name: region_id
+          in: path
+          description: region id number.
+          required: true
+          schema:
+            type: integer
+            format: int64  
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                region_name:
+                  type: string
+                country_name:
+                  type: string
+                city_name:
+                  type: string 
+      responses:
+        "200":
+          description: 'succssesful conection'
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 200
+                     description: 'region_id :region_id modified correctly!'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true
+        "400":
+          description: Successfull conection
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 400
+                     description: 'region_id :region_id does not exist'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true            
+        "500":
+          $ref: '#/components/responses/500'  
+  '/regions/{region_id}/delete':
+    delete:
+      tags:
+        - Regions
+      summary: Soft Delete of a region.
+      security:
+        - bearerToken: []
+      parameters:
+        - name: region_id
+          in: path
+          description: region_id id number.
+          required: true
+          schema:
+            type: integer
+            format: int68
+        - name: eliminado
+          in: query
+          description: gets true boolean to delete region.
+          required: true
+          schema:
+            type: boolean    
+      responses:
+        "200":
+          description: "makes region inactive to GET"
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 200
+                     description: 'region_id: :region_id is now inactive!'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true
+        "400":
+          description: Succes conection
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 400
+                     description: 'region_id :region_id does not exist.'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true            
+        "500":
+          $ref: '#/components/responses/500'        
+  
+  '/countries/{country_id}/modify':
+    patch:
+      tags:
+        - Countries
+      summary: modify any country on database with an ID.
+      security:
+        - bearerToken: []
+      parameters:
+        - name: country_id
+          in: path
+          description: country id number.
+          required: true
+          schema:
+            type: integer
+            format: int64  
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                country_name:
+                  type: string
+                
+      responses:
+        "200":
+          description: 'succssesful conection'
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 200
+                     description: 'country_id :country_id modified correctly!'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true
+        "400":
+          description: Successfull conection
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 400
+                     description: 'country_id :country_id does not exist'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true            
+        "500":
+          $ref: '#/components/responses/500'  
+  '/countries/{country_id}/delete':
+    delete:
+      tags:
+        - Countries
+      summary: Soft Delete of a country.
+      security:
+        - bearerToken: []
+      parameters:
+        - name: country_id
+          in: path
+          description: country_id id number.
+          required: true
+          schema:
+            type: integer
+            format: int68
+        - name: eliminado
+          in: query
+          description: gets true boolean to delete region.
+          required: true
+          schema:
+            type: boolean    
+      responses:
+        "200":
+          description: "makes country inactive to GET"
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 200
+                     description: 'country_id: :country_id is now inactive!'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true
+        "400":
+          description: Succes conection
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 400
+                     description: 'country_id :country_id does not exist.'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true            
+        "500":
+          $ref: '#/components/responses/500'                
+  
+  '/cities':
+    get:
+      tags:
+        - Cities
+      summary: gets all cities in database.
+      security:
+        - bearerToken: []
+      responses:
+        "200":
+          description: Successfull conection
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 200
+                     description: success!
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    data: data
+                    isAuthenticated: true
+        "500":
+          $ref: '#/components/responses/500'
+  '/cities/{city_id}/modify':
+    patch:
+      tags:
+        - Cities
+      summary: modify any city on database with an ID.
+      security:
+        - bearerToken: []
+      parameters:
+        - name: city_id
+          in: path
+          description: city id number.
+          required: true
+          schema:
+            type: integer
+            format: int64  
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                city_name:
+                  type: string
+                parent_id:
+                  type: number
+      responses:
+        "200":
+          description: 'succssesful conection'
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 200
+                     description: 'city_id :city_id modified correctly!'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true
+        "400":
+          description: Successfull conection
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 400
+                     description: 'city_id :city_id does not exist'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true            
+        "500":
+          $ref: '#/components/responses/500'  
+  '/cities/{city_id}/delete':
+    delete:
+      tags:
+        - Cities
+      summary: Soft Delete of a city.
+      security:
+        - bearerToken: []
+      parameters:
+        - name: city_id
+          in: path
+          description: city_id id number.
+          required: true
+          schema:
+            type: integer
+            format: int68
+        - name: eliminado
+          in: query
+          description: gets true boolean to delete city.
+          required: true
+          schema:
+            type: boolean    
+      responses:
+        "200":
+          description: "makes city inactive to GET"
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 200
+                     description: 'city_id: :city_id is now inactive!'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true
+        "400":
+          description: Successfull conection
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  requestInfo:
+                     code: 400
+                     description: 'city_id :city_id does not exist.'
+                     date: 'Fri Feb 19 2021 12:53:10 GMT-0300 (hora estándar de Argentina)'
+                  data:
+                    isAuthenticated: true            
+        "500":
+          $ref: '#/components/responses/500'
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: 

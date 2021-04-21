@@ -1,0 +1,165 @@
+.tree-node {
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+  /* max-height: 40px; */
+  max-height: 100px;
+  height: 100px;
+  color: #273152;
+}
+.nothign {
+  color: #273152;
+  font-size: 1.01rem;
+  border-radius: 4px;
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 3px solid rgba(90, 217, 172, 0.5);
+}
+.tree-node .tree-icon.close-icon {
+  background-image: url(https://alekseymakhankov.github.io/packages/static/media/minus.77d09f6f.svg);
+  width: 12px;
+  height: 12px;
+  background-size: contain;
+}
+.tree-node .tree-icon.open-icon {
+  background-image: url(https://alekseymakhankov.github.io/packages/static/media/plus.721c19f2.svg);
+  width: 12px;
+  height: 12px;
+  background-size: contain;
+}
+.tree-node .tree-icon {
+  margin-right: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  background-repeat: no-repeat;
+}
+.children-length {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 24px;
+  height: 25px;
+  background-color: rgba(90, 217, 172, 0.9);
+  color: #fff;
+  padding: 4px;
+  font-size: 12px;
+  border-radius: 16px;
+  /* margin-left: 12px; */
+  /* margin-right: 15px; */
+  font-weight: 600;
+  box-sizing: border-box;
+}
+.tree-node .node-content-wrapper {
+  cursor: pointer;
+  min-height: 40px;
+  /* max-height: 40px; */
+  max-height: 100px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  width: 100%;
+  padding: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  border-radius: 15px;
+}
+.tree-node .node-content-wrapper:hover {
+  background-color: rgba(90, 217, 172, 0.1);
+  border-left: 6px solid rgba(90, 217, 172, 0.8);
+  color: #273152;
+  border-radius: 8px;
+}
+
+.tree-node .node-content-wrapper .titles {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.tree-node .node-content-wrapper .titles .node-title {
+  font-weight: 600;
+}
+.tree-node .node-content-wrapper .titles .node-subtitle {
+  margin-top: 4px;
+  font-size: 10px;
+}
+
+.regions-sect {
+  width: 90%;
+  margin: 20px 5%;
+  min-height: 70vh;
+}
+.plegable-button-ctn {
+  color: black;
+  display: flex;
+  flex-flow: column wrap;
+  width: fit-content;
+  position: absolute;
+  z-index: 100;
+  border: 1px solid #273152;
+  border-radius: 25px;
+  justify-content: center;
+  font-weight: 500;
+  background: #fff;
+}
+.plegable-button-ctn a {
+  color: #273152 !important;
+  text-align: center;
+  /* padding: 8px 0; */
+}
+.userComp-div {
+  min-height: 50px;
+  display: flex;
+  flex-flow: row-reverse;
+}
+.showPlegable {
+  display: block;
+  height: 40px;
+  padding: 10px 0;
+  transition: all 1s ease;
+}
+.hidePlegable {
+  display: none;
+  height: 0px;
+  padding: 0;
+}
+.generic-button-plegable {
+  min-width: 51px;
+  padding: 10px 38px;
+  border: 1px solid #273152;
+  border-radius: 25px;
+  color: #fff;
+  text-decoration: none;
+  background: #273152 !important;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.countAndAction {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  margin-right: 10px;
+}
+.acciones svg{
+  margin-right: 15px;
+}
+.node-title-geo{
+  opacity: 0.5;
+}
+.inputsTitle{
+  width: 90%;
+}
+.tick, .cross{
+  font-size: 25px;
+  margin-right: 10px !important;
+
+}
+.tick:hover{
+  color:rgb(90, 217, 172);
+}
+.cross:hover{
+color: rgb(195,76,78);
+}

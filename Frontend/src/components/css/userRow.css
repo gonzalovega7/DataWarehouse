@@ -1,0 +1,56 @@
+.contacto-img {
+  width: 24px;
+  height: 24px;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+.grid-contacto {
+  display: grid;
+  grid-template: repeat(2, 1fr) / 90%;
+  padding-left: 10%;
+  text-align: start;
+  grid-gap: 0 16px;
+  margin: 0;
+}
+.contacto-desc {
+  grid-column-start: 1;
+}
+.table-bordered td {
+  border: 0 !important;
+}
+.label-desc {
+  width: 100%;
+  color: grey;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  font-size: 12px;
+}
+.grid-pais {
+  display: grid;
+  grid-template: repeat(2, 1fr) / 1fr;
+  text-align: start;
+}
+.td-align {
+  text-align: start;
+  vertical-align: middle !important;
+}
+.porcentaje {
+  font-weight: bold;
+  font-size: 12px;
+}
+.acciones {
+  text-align: center;
+  vertical-align: middle !important;
+  /* position: absolute; */
+}
+.acciones span {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+.icon-hover:hover{
+  background-color: transparent;
+ cursor: pointer;
+
+}

@@ -35,10 +35,10 @@ Asi mismo, el usuario que no posee permisos de administardor tiene como
 
 #### 4 - Start the server 🚀
 
-Inside the folde FRONTEND ("../data-warehose-project/frontend") run the following code:
+Inside the folder front ("../DataWarehouse/front") run the following code:
 
-Then, to use the backend it should be located in "../data-warehose-project":
+Then, to use the backend it should be located in "../DataWarehouse":
 
-⌨️ cd ./backend
+⌨️ cd ./back
 ⌨️ npm start
 
